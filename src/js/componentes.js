@@ -1,5 +1,9 @@
+import { Todo } from "../classes";
+import { todoList } from "../index"
+
 //referencias en el html
 const divTodoList = document.querySelector( '.todo-list');
+const txtInput = document.querySelector('.new-todo');
 
 
 
@@ -24,6 +28,26 @@ const divTodoList = document.querySelector( '.todo-list');
 
     divTodoList.append(div.firstElementChild);
 
-    return div;
+    return div.firstElementChild;
 
  }
+
+
+ //Eventos en html
+
+ //Para agregar una nueva tarea a la lista
+ txtInput.addEventListener('keyup', (event)=> {
+    //cuando presionen entre (code 13) y si la persona no escribe nada, lo va a ignorar.
+    if( event.keyCode === 13 && txtInput.value.length > 0){
+        //Manda lo que la presona escribio
+        console.log(txtInput.value);
+        const nuevoTodo = new Todo(txtInput.value);
+        todoList.nuevoTodo( nuevoTodo )
+
+
+        crearTodoHtml( nuevoTodo );
+        txtInput.value = '';
+    }
+
+
+ })
